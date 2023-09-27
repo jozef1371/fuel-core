@@ -9,10 +9,7 @@ if [ "${k8s_provider}" == "eks" ]; then
     echo "Updating your kube context locally ...."
     aws eks update-kubeconfig --name ${TF_VAR_eks_cluster_name}
     
-    echo "Copying chainspec into deployment context ...."
-    cp chainspec/${chain_spec_file} ../charts/chainspec.json
-    export fuel_core_consensus_key_secret_base64_encoded=$(echo -n $fuel_core_consensus_key_secret | base64 -w 0) 
-    
+   
     cd ../secrets/
     echo "Creating the fuel-core k8s secret ...."
     mv fuel-core-secret.yaml fuel-core-secret.template
